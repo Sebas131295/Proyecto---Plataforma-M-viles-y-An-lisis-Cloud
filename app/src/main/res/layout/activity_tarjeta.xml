@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tarjetaActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Imagen simulada de la tarjeta -->
+
+        <!-- Campo para ingresar el número de tarjeta -->
+        <TextView
+            android:id="@+id/tarjetaImageView"
+            android:layout_width="308dp"
+            android:layout_height="265dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/ic_card"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="**** **** **** ****"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/numeroTarjetaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número de Tarjeta"
+            android:inputType="number"
+            android:maxLength="16"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Campo para ingresar el nombre del titular -->
+        <EditText
+            android:id="@+id/nombreTitularEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del Titular"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Botón para registrar la tarjeta -->
+        <Button
+            android:id="@+id/registrarButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrar"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
