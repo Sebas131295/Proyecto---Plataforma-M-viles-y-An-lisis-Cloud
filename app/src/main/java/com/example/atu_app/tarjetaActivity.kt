@@ -17,7 +17,7 @@ class tarjetaActivity : AppCompatActivity() {
     private lateinit var nombreTitularEditText: EditText
     private lateinit var tarjetaImageView: TextView
     private lateinit var registrarButton: Button
-    private val tarjetasList = mutableListOf<Tarjeta>()
+    private val tarjetasList = mutableListOf<tarjeta>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

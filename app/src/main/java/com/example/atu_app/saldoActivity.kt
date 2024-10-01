@@ -11,20 +11,28 @@ class saldoActivity : AppCompatActivity() {
     companion object {
         var montoActual: Double = 50.0
         private val movimientos = mutableListOf<movimiento>()
+        private var movimientosIniciados = false
     }
 
     private lateinit var montoTextView: TextView
     private lateinit var movimientosListView: ListView
     private lateinit var adapter: ArrayAdapter<String>
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_saldo)
 
         // Inicializar vistas
         montoTextView = findViewById(R.id.montoTextView)
         movimientosListView = findViewById(R.id.movimientosListView)
 
+        // Verificar si ya se agregaron los movimientos iniciales
+        if (!movimientosIniciados) {
+            agregarMovimientosIniciales()
+            movimientosIniciados = true // Marcar que ya se agregaron los movimientos
+        }
 
         // Actualizar la lista de movimientos
         actualizarListaMovimientos()
@@ -35,12 +43,12 @@ class saldoActivity : AppCompatActivity() {
 
         // Obtener datos de la transacción desde el Intent
         val monto = intent.getDoubleExtra("monto", 0.0)
-        val tarjeta = intent.getStringExtra("tarjeta")
+        val metodo = intent.getStringExtra("metodo")
 
         // Si hay un monto y una tarjeta, agregar el movimiento y aumentar el monto actual
-        if (monto != 0.0 && tarjeta != null) {
+        if (monto != 0.0 && metodo != null) {
             montoActual += monto
-            agregarMovimiento("Ingreso", monto, "Depósito con $tarjeta")
+            agregarMovimiento("Ingreso", monto, "Depósito con $metodo")
             actualizarListaMovimientos()
         }
     }
@@ -49,8 +57,8 @@ class saldoActivity : AppCompatActivity() {
     private fun agregarMovimiento(tipo: String, cantidad: Double, descripcion: String) {
         val nuevoMovimiento = movimiento(tipo, cantidad, descripcion)
         movimientos.add(nuevoMovimiento)
-        if (movimientos.size > 5) {
-            movimientos.removeAt(0) // Limitar a los últimos 5 movimientos
+        if (movimientos.size > 10) {
+            movimientos.removeAt(0) // Limitar a los últimos 10 movimientos
         }
     }
 
@@ -64,5 +72,18 @@ class saldoActivity : AppCompatActivity() {
 
         // Actualizar el monto actual en la interfaz
         montoTextView.text = "Monto actual: $montoActual"
+    }
+
+    // Función para agregar los 5 movimientos iniciales
+    private fun agregarMovimientosIniciales() {
+            movimientos.add(movimiento("Ingreso", 20.0, "Depóito plin"))
+        movimientos.add(movimiento("Ingreso", 100.0, "Depósito yape"))
+        movimientos.add(movimiento("Ingreso", 10.0, "Depóito plin"))
+        movimientos.add(movimiento("Ingreso", 30.0, "Depóito plin"))
+        movimientos.add(movimiento("Ingreso", 50.0, "Depóito plin"))
+        movimientos.add(movimiento("Ingreso", 100.0, "Depósito yape"))
+        movimientos.add(movimiento("Ingreso", 10.0, "Depóito plin"))
+        movimientos.add(movimiento("Ingreso", 30.0, "Depóito yape"))
+        movimientos.add(movimiento("Ingreso", 50.0, "Depóito yape"))
     }
 }

@@ -20,17 +20,24 @@
             android:hint="Ingrese el monto"
             android:inputType="numberDecimal" />
 
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/metodoRadio"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            <RadioButton
+                android:id="@+id/yapeRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yape" />
+
+            <RadioButton
+                android:id="@+id/plinRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plin" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/depositarButton"
