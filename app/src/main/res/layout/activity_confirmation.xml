@@ -15,11 +15,41 @@
         android:background="@android:color/white">
 
         <ImageView
-            android:id="@+id/checkIcon"
-            android:layout_width="287dp"
-            android:layout_height="294dp"
-            android:contentDescription="Check Icon"
-            android:src="@drawable/ic_check" />
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/recarga_exitosa" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="¡Felicitaciones!"
+            android:textColor="@color/azul"
+            android:textSize="55sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Recarga registrada con éxito"
+            android:textAlignment="center"
+            android:textColor="@color/gris"
+            android:textSize="35sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

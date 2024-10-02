@@ -16,35 +16,68 @@
         <EditText
             android:id="@+id/ingresoInput"
             android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/editext_background"
+            android:ems="10"
+            android:hint="Ingrese el Monto"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="@color/gris"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese el monto"
-            android:inputType="numberDecimal" />
+            android:text="Método de pago"
+            android:textColor="@color/negro"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
 
         <RadioGroup
             android:id="@+id/metodoRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp">
 
             <RadioButton
                 android:id="@+id/yapeRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yape" />
+                android:text="Yape"
+                android:textSize="17dp" />
 
             <RadioButton
                 android:id="@+id/plinRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Plin" />
+                android:text="Plin"
+                android:textSize="17dp" />
+
+            <RadioButton
+                android:id="@+id/cardRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tarjeta de Débito/Crédito"
+                android:textSize="17dp" />
         </RadioGroup>
 
         <Button
             android:id="@+id/depositarButton"
+            style="@android:style/Widget.Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Depositar" />
+            android:layout_height="55dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_background_blue1"
+            android:text="Registrar"
+            android:textColor="@color/blanco"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

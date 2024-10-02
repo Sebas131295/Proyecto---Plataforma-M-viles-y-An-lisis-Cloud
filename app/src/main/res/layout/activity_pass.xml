@@ -8,41 +8,125 @@
     tools:context=".passActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="180dp"
         android:orientation="vertical"
-        android:gravity="center_vertical"
-        android:padding="16dp">
+        android:padding="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView44"
+        app:layout_constraintVertical_bias="0.259">
 
         <EditText
-            android:id="@+id/emailInput"
+            android:id="@+id/dniPassInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Correo electrónico"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/editTextText5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/editext_background"
             android:ems="10"
+            android:hint="Ingrese su DNI"
             android:inputType="text"
-            android:text="Nueva contraseña" />
+            android:padding="12dp"
+            android:textColor="@color/gris"
+            android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Restablecer contraseña"
-            android:layout_gravity="center"/>
-
-        <Button
-            android:id="@+id/backToLoginButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Volver al Login"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/newPassInput"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/editext_background"
+            android:ems="10"
+            android:hint="Ingrese su Nueva contraseña"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="@color/gris"
+            android:textSize="18sp" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="250sp"
+        android:layout_height="0dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/img_logo"
+        app:layout_constraintBottom_toTopOf="@+id/textView19"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:text="¿Has olvidado tu contraseña?"
+        android:textAlignment="center"
+        android:textColor="@color/negro"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView44"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="339dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="399dp"
+        android:text="Para restablecer su contraseña, necesita su DNI para que pueda autenticarse."
+        android:textAlignment="center"
+        android:textColor="@color/gris"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/newPassButton"
+        style="@android:style/Widget.Button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button_background_blue1"
+        android:text="Restablecer contraseña"
+        android:textColor="@color/blanco"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/backToLoginButton"
+        style="@android:style/Widget.Button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button_background_blue1"
+        android:text="Volver al inicio de sesión"
+        android:textColor="@color/blanco"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

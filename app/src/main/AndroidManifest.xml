@@ -13,31 +13,28 @@
         android:theme="@style/Theme.ATU_app"
         tools:targetApi="31">
         <activity
-            android:name=".pasajeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".crearCuentaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".perfilActivity"
-            android:exported="false" />
-        <activity
-            android:name=".buscarRutasActivity"
-            android:exported="false" />
-        <activity
-            android:name=".estacionesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".tarjetaActivity"
+            android:name=".actTarjetaActivity"
             android:exported="false" />
         <activity
             android:name=".confirmationActivity"
             android:exported="false" />
         <activity
+            android:name=".createUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".depositarActivity"
             android:exported="false" />
         <activity
+            android:name=".estacionesActivity"
+            android:exported="false" />
+        <activity
             android:name=".passActivity"
+            android:exported="false" />
+        <activity
+            android:name=".perfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tarjetaActivity"
             android:exported="false" />
         <activity
             android:name=".saldoActivity"

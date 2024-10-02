@@ -11,13 +11,15 @@ class confirmationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_confirmation)
 
         val monto = intent.getDoubleExtra("monto", 0.0)
+        val fecha = intent.getStringExtra("fechaActual")
         val metodoSeleccionado = intent.getStringExtra("metodo")
 
-        if (monto != null && metodoSeleccionado != null) {
+        if (monto != null && metodoSeleccionado != null && fecha != null) {
             // Pasar datos a SaldoActivity
             Handler().postDelayed({
                 val intent = Intent(this, saldoActivity::class.java)
                 intent.putExtra("monto", monto)
+                intent.putExtra("fecha", fecha)
                 intent.putExtra("metodo", metodoSeleccionado)
                 startActivity(intent)
                 finish() // Finaliza ConfirmationActivity

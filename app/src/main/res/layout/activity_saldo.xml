@@ -12,26 +12,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Inicio"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif-black"
             android:text="Monto Actual:"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
@@ -41,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="73dp"
             android:layout_gravity="center"
+            android:fontFamily="sans-serif-medium"
             android:text="S/.0.0"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
@@ -49,7 +38,7 @@
             android:id="@+id/movimientosListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

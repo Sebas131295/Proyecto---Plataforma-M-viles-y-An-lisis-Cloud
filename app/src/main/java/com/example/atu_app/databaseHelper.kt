@@ -19,10 +19,6 @@ const val COL_TELEFONO = "telefono"
 const val COL_CORREO = "correo"
 const val COL_CONTRASEÑA = "contraseña"
 
-const val TABLE_LOGIN = "login"
-const val COL_LOGIN_ID = "id"
-const val COL_NOMBRE_USUARIO = "nombre_usuario"
-
 const val TABLE_TARJETA = "tarjeta"
 const val COL_TARJETA_ID = "id"
 const val COL_NUMERO_TARJETA = "numero_tarjeta"
@@ -41,6 +37,7 @@ const val COL_DIRECCION = "horario_cierre"
 const val COL_DISTRITO = "distrito"
 
 class databaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+    private val sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
 
     override fun onCreate(db: SQLiteDatabase?) {
         // Crear tabla usuario
@@ -52,16 +49,6 @@ class databaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                     "$COL_TELEFONO TEXT," +
                     "$COL_CORREO TEXT," +
                     "$COL_CONTRASEÑA TEXT)"
-        )
-
-        // Crear tabla login
-        db?.execSQL(
-            "CREATE TABLE $TABLE_LOGIN (" +
-                    "$COL_LOGIN_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "$COL_DNI TEXT," +
-                    "$COL_NOMBRE_USUARIO TEXT," +
-                    "$COL_CONTRASEÑA TEXT," +
-                    "FOREIGN KEY($COL_DNI) REFERENCES $TABLE_USUARIO($COL_DNI))"
         )
 
         // Crear tabla tarjeta
@@ -98,7 +85,6 @@ class databaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         // Eliminar tablas si existen y volver a crear
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_USUARIO")
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_LOGIN")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_TARJETA")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_HISTORIAL")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_ESTACIONES")
@@ -119,75 +105,28 @@ class databaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return db.insert(TABLE_USUARIO, null, values)
     }
 
-    fun insertarLogin(dni: String, nombreUsuario: String, contraseña: String): Long {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put(COL_DNI, dni)
-        values.put(COL_NOMBRE_USUARIO, nombreUsuario)
-        values.put(COL_CONTRASEÑA, contraseña)
-        return db.insert(TABLE_LOGIN, null, values)
-    }
+    fun insertarMovimiento(monto: Double, descripcion: String, fechaActual: String) {
+        // Obtener el DNI del usuario desde SharedPreferences
+        val dniUsuario = sharedPreferences.getString("dniUsuario", null)
 
-    fun insertarTarjeta(dni: String, numeroTarjeta: String, monto: Double): Long {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put(COL_DNI, dni)
-        values.put(COL_NUMERO_TARJETA, numeroTarjeta)
-        values.put(COL_MONTO, monto)
-        return db.insert(TABLE_TARJETA, null, values)
-    }
-
-    fun insertarMovimiento(monto: Double, descripcion: String) {
         val db = writableDatabase
         val contentValues = ContentValues().apply {
-            put("monto", monto)
-            put("descripcion", descripcion)
-            // Otros campos como fecha, etc.
+            put(COL_CANTIDAD, monto)
+            put(COL_FECHA, fechaActual)
+            put(COL_DESCRIPCION, descripcion)
+            put(COL_DNI, dniUsuario)  // Agregar el DNI del usuario
         }
-        db.insert("historial", null, contentValues)
+        db.insert(TABLE_HISTORIAL, null, contentValues)
         db.close()
     }
 
-    fun insertarEstacion(nombre: String, distrito: String, horarioCierre: String): Long {
+    fun insertarEstacion(nombre: String, direccion: String, distrito: String): Long {
         val db = writableDatabase
         val values = ContentValues()
         values.put(COL_NOMBRE_ESTACION, nombre)
-        values.put(COL_DIRECCION, horarioCierre)
+        values.put(COL_DIRECCION, direccion)
         values.put(COL_DISTRITO, distrito)
         return db.insert(TABLE_ESTACIONES, null, values)
-    }
-
-    // Métodos para leer datos
-
-    fun leerUsuarios(): Cursor {
-        val db = readableDatabase
-        return db.rawQuery("SELECT * FROM $TABLE_USUARIO", null)
-    }
-
-    fun leerLogin(): Cursor {
-        val db = readableDatabase
-        return db.rawQuery("SELECT * FROM $TABLE_LOGIN", null)
-    }
-
-    fun leerTarjetas(): Cursor {
-        val db = readableDatabase
-        return db.rawQuery("SELECT * FROM $TABLE_TARJETA", null)
-    }
-
-    @SuppressLint("Range")
-    fun leerHistorial(): MutableList<String> {
-        val historial = mutableListOf<String>()
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM historial ORDER BY fecha DESC LIMIT 5", null)
-
-        if (cursor.moveToFirst()) {
-            do {
-                val descripcion = cursor.getString(cursor.getColumnIndex("descripcion"))
-                historial.add(descripcion)
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        return historial
     }
 
     @SuppressLint("Range")
@@ -209,42 +148,22 @@ class databaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return estaciones
     }
 
+    fun leerMovimientosPorDNI(dni: String): Cursor {
+        val db = this.readableDatabase
+
+        // Consulta que obtiene movimientos del usuario actual y movimientos de relleno (sin DNI)
+        val query = "SELECT * FROM $TABLE_HISTORIAL WHERE $COL_DNI = ? OR $COL_DNI IS NULL"
+
+        return db.rawQuery(query, arrayOf(dni))
+    }
+
     // Métodos para actualizar datos
 
-    fun actualizarUsuario(dni: String, nombre: String, apellido: String, telefono: String, correo: String, contraseña: String): Int {
+    fun actualizarUsuario(dni: String, contraseña: String): Int {
         val db = writableDatabase
         val values = ContentValues()
-        values.put(COL_NOMBRE, nombre)
-        values.put(COL_APELLIDO, apellido)
-        values.put(COL_TELEFONO, telefono)
-        values.put(COL_CORREO, correo)
         values.put(COL_CONTRASEÑA, contraseña)
         return db.update(TABLE_USUARIO, values, "$COL_DNI=?", arrayOf(dni))
-    }
-
-    fun actualizarTarjeta(dni: String, numeroTarjeta: String, monto: Double): Int {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put(COL_NUMERO_TARJETA, numeroTarjeta)
-        values.put(COL_MONTO, monto)
-        return db.update(TABLE_TARJETA, values, "$COL_DNI=?", arrayOf(dni))
-    }
-
-    fun actualizarLogin(dni: String, nombreUsuario: String, contraseña: String): Int {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put(COL_NOMBRE_USUARIO, nombreUsuario)
-        values.put(COL_CONTRASEÑA, contraseña)
-        return db.update(TABLE_LOGIN, values, "$COL_DNI=?", arrayOf(dni))
-    }
-
-    fun actualizarHistorial(dni: String, fecha: String, cantidad: Double, descripcion: String): Int {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put(COL_FECHA, fecha)
-        values.put(COL_CANTIDAD, cantidad)
-        values.put(COL_DESCRIPCION, descripcion)
-        return db.update(TABLE_HISTORIAL, values, "$COL_DNI=?", arrayOf(dni))
     }
 
     @SuppressLint("Range")
@@ -266,15 +185,111 @@ class databaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return estaciones
     }
 
-    fun obtenerMontoActual(): Double {
-        var montoActual = 0.0
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT SUM(cantidad) FROM historial", null)
-
+    fun contarMovimientos(): Int {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT COUNT(*) FROM $TABLE_HISTORIAL", null)
+        var count = 0
         if (cursor.moveToFirst()) {
-            montoActual = cursor.getDouble(0) // Sumar todas las cantidades
+            count = cursor.getInt(0) // Obtener el recuento del primer (y único) campo
         }
         cursor.close()
-        return montoActual
+        return count
+    }
+
+    fun obtenerMovimientosPorDNI(dni: String): List<String> {
+        val db = this.readableDatabase
+        val movimientosList = mutableListOf<String>()
+
+        val query = "SELECT * FROM $TABLE_HISTORIAL WHERE $COL_DNI = ?"
+        val cursor = db.rawQuery(query, arrayOf(dni))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val fecha = cursor.getString(cursor.getColumnIndexOrThrow(COL_FECHA))
+                val cantidad = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_CANTIDAD))
+                val descripcion = cursor.getString(cursor.getColumnIndexOrThrow(COL_DESCRIPCION))
+
+                val movimiento = "ngreso $cantidad, $descripcion, $fecha"
+                movimientosList.add(movimiento)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return movimientosList
+    }
+
+
+    fun obtenerSumaMontosPorDNI(dni: String): Double {
+        val db = this.readableDatabase
+        var sumaMontos = 0.0
+
+        val query = "SELECT SUM($COL_CANTIDAD) AS total FROM $TABLE_HISTORIAL WHERE $COL_DNI = ?"
+        val cursor = db.rawQuery(query, arrayOf(dni))
+
+        if (cursor.moveToFirst()) {
+            sumaMontos = cursor.getDouble(cursor.getColumnIndexOrThrow("total"))
+        }
+
+        cursor.close()
+        db.close()
+
+        return sumaMontos
+    }
+
+
+    fun obtenerUsuarioPorDni(dni: String): usuario? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM usuario WHERE dni = ?", arrayOf(dni))
+
+        return if (cursor.moveToFirst()) {
+            // Crear un objeto Usuario con los datos obtenidos
+            val usuario = usuario(
+                dni = cursor.getString(cursor.getColumnIndexOrThrow("dni")),
+                nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre")),
+                apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido")),
+                telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono")),
+                correo = cursor.getString(cursor.getColumnIndexOrThrow("correo")),
+                contrasena = cursor.getString(cursor.getColumnIndexOrThrow("contraseña"))
+            )
+            cursor.close()
+            usuario
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+    fun obtenerTarjetaPorDni(dni: String): tarjeta? {
+        val db = this.readableDatabase
+        var tarjeta: tarjeta? = null
+
+        // Consulta SQL para buscar la tarjeta según el DNI
+        val query = "SELECT * FROM $TABLE_TARJETA WHERE $COL_DNI = ?"
+        val cursor = db.rawQuery(query, arrayOf(dni))
+
+        // Si se encuentra la tarjeta, crear un objeto Tarjeta
+        if (cursor.moveToFirst()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_TARJETA_ID))
+            val numeroTarjeta = cursor.getString(cursor.getColumnIndexOrThrow(COL_NUMERO_TARJETA))
+            val monto = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_MONTO))
+
+            tarjeta = tarjeta(id, dni, numeroTarjeta, monto)
+        }
+
+        cursor.close()
+        db.close()
+
+        return tarjeta
+    }
+
+    fun existeTarjeta(dni: String): Boolean {
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_TARJETA WHERE $COL_DNI = ?"
+        val cursor = db.rawQuery(query, arrayOf(dni))
+        val existe = cursor.count > 0
+        cursor.close()
+        return existe
     }
 }

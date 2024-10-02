@@ -7,68 +7,98 @@
     android:layout_height="match_parent"
     tools:context=".perfilActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_margin="15dp">
+        android:padding="30dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="73dp">
 
         <TextView
             android:id="@+id/nombreTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="356dp"
+            android:layout_height="43dp"
+            android:fontFamily="monospace"
             android:text="Nombre"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/negro"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/apellidoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="356dp"
+            android:layout_height="43dp"
+            android:fontFamily="monospace"
             android:text="Apellido"
-            android:textSize="16sp" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/negro"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/dniTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="356dp"
+            android:layout_height="43dp"
+            android:fontFamily="monospace"
             android:text="DNI"
-            android:textSize="16sp" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/negro"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/telefonoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="356dp"
+            android:layout_height="43dp"
+            android:fontFamily="monospace"
             android:text="Teléfono"
-            android:textSize="16sp" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/negro"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/correoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="356dp"
+            android:layout_height="43dp"
+            android:fontFamily="monospace"
             android:text="Correo"
-            android:textSize="16sp" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/negro"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/numeroTarjetaTextView"
+            android:layout_width="356dp"
+            android:layout_height="43dp"
+            android:fontFamily="monospace"
+            android:hint="Número de tarjeta"
+            android:textAlignment="viewStart"
+            android:textColor="@color/negro"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/contrasenaTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="monospace"
                 android:text="Contraseña"
+                android:textColor="@color/negro"
                 android:textSize="16sp" />
 
             <Button
                 android:id="@+id/revelarButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:text="Revelar"
-                android:layout_marginStart="16dp"/>
+                android:textColor="@color/blanco"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

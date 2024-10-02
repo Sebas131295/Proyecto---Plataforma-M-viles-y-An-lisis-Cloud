@@ -11,49 +11,101 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        tools:layout_editor_absoluteX="109dp"
+        tools:layout_editor_absoluteY="173dp">
 
-        <!-- Imagen simulada de la tarjeta -->
-
-        <!-- Campo para ingresar el número de tarjeta -->
         <TextView
             android:id="@+id/tarjetaImageView"
-            android:layout_width="308dp"
-            android:layout_height="265dp"
+            android:layout_width="310dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/ic_card"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="**** **** **** ****"
-            android:textColor="@color/white"
+            android:background="@drawable/item_tarjeta"
+            android:paddingLeft="15dp"
+            android:paddingTop="135dp"
+            android:text="***** *****"
+            android:textColor="@color/negro"
             android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DNI"
+            android:textColor="@color/negro"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/numeroTarjetaEditText"
             android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/editext_background"
+            android:ems="10"
+            android:hint="Ingrese su Número de tarjeta"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="@color/gris"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Número de Tarjeta"
-            android:inputType="number"
-            android:maxLength="16"
-            android:layout_marginBottom="16dp"/>
+            android:text="Tarjeta"
+            android:textColor="@color/negro"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
 
         <!-- Campo para ingresar el nombre del titular -->
         <EditText
-            android:id="@+id/nombreTitularEditText"
+            android:id="@+id/dniTitularEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre del Titular"
-            android:layout_marginBottom="24dp"/>
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/editext_background"
+            android:ems="10"
+            android:hint="Ingrese su DNI"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="@color/gris"
+            android:textSize="18sp" />
 
-        <!-- Botón para registrar la tarjeta -->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registrarButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_background_blue1"
             android:text="Registrar"
-            android:layout_gravity="center"/>
+            android:textColor="@color/blanco"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/actualizarButton"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_background_blue1"
+            android:text="Actualizar"
+            android:textColor="@color/blanco"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

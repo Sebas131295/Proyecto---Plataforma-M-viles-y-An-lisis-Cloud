@@ -7,52 +7,149 @@
     android:layout_height="match_parent"
     tools:context=".loginActivity">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="154dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="54dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_logo" />
+
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:text="Iniciar Sesión"
+        android:textColor="@color/negro"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="100dp">
+        android:padding="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10">
+        >
 
-        <ImageView
-            android:id="@+id/loginImage"
-            android:layout_width="179dp"
-            android:layout_height="179dp"
-            android:layout_gravity="center"
-            android:src="@drawable/user" />
-
-        <EditText
-            android:id="@+id/usernameInput"
+        <TextView
+            android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre de usuario" />
+            android:text="DNI"
+            android:textColor="@color/negro"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/dniInput"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/editext_background"
+            android:ems="10"
+            android:hint="Ingrese su DNI"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="@color/gris"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Contraseña"
+            android:textColor="@color/negro"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:inputType="textPassword"/>
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/editext_background"
+            android:ems="10"
+            android:hint="Ingrese su Contraseña"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColor="@color/gris"
+            android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Iniciar sesión"
-            android:layout_gravity="center"/>
-        <Button
-            android:id="@+id/createButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Crear cuenta"
-            android:layout_gravity="center"/>
-        <Button
-            android:id="@+id/passButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-                android:text="Me olvidé la contraseña"
-            android:layout_gravity="center"/>
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginButton"
+        style="@android:style/Widget.Button"
+        android:layout_width="344dp"
+        android:layout_height="60dp"
+        android:background="@drawable/button_background_blue1"
+        android:text="Iniciar Sesión"
+        android:textColor="@color/blanco"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="58dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/createButton"
+                android:layout_width="91dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:backgroundTint="#00666666"
+                android:shadowColor="#00FFFFFF"
+                android:text="Crear cuenta"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/passButton"
+                android:layout_width="157dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:backgroundTint="#00FFFFFF"
+                android:text="Me olvidé la contraseña"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
